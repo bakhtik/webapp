@@ -1,6 +1,10 @@
 package models
 
-import "database/sql"
+import (
+	"database/sql"
+
+	_ "github.com/denisenkom/go-mssqldb"
+)
 
 type Datastore interface {
 	Info() string

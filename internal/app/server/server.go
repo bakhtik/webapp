@@ -14,24 +14,26 @@ type Server struct {
 	cache      models.Cache
 	mux        *http.ServeMux
 	httpServer *http.Server
+	config     *Config
 }
 
 type Config struct {
-	dbConnString string
-	cacheAddr    string
-	serverAddr   string
+	DbConnString string
+	CacheAddr    string
+	ServerAddr   string
 }
 
-func NewServer() *Server {
+func NewServer(config *Config) *Server {
 	s := &Server{
 		// just in case you need some setup here
+		config: config,
 	}
 	return s
 }
 
-func (s *Server) Start(config Config) {
+func (s *Server) Start() {
 	// Startup all dependencies
-	s.Dependencies(config)
+	s.Dependencies()
 
 	// Startup the http Server in a way that
 	// we can gracefully shut it down again
@@ -39,7 +41,7 @@ func (s *Server) Start(config Config) {
 	// register handlers
 	s.routes()
 
-	s.httpServer = &http.Server{Addr: config.serverAddr, Handler: s.mux}
+	s.httpServer = &http.Server{Addr: s.config.ServerAddr, Handler: s.mux}
 	err := s.httpServer.ListenAndServe() // Blocks!
 	if err != http.ErrServerClosed {
 		log.Print("Http Server stopped unexpected")
@@ -62,11 +64,11 @@ func (s *Server) Shutdown() {
 	}
 }
 
-func (s *Server) Dependencies(config Config) {
-	db, err := models.NewDB(config.dbConnString)
+func (s *Server) Dependencies() {
+	db, err := models.NewDB(s.config.DbConnString)
 	if err != nil {
 		log.Panic(err)
 	}
 	s.db = db
-	s.cache = models.NewClient(config.cacheAddr)
+	s.cache = models.NewClient(s.config.CacheAddr)
 }
