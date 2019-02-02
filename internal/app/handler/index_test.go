@@ -28,10 +28,12 @@ func TestIndexHandler(t *testing.T) {
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("Response code is not 200: %v", resp.StatusCode)
 	}
-	if strings.Contains(string(body), "Welcome to Security Management System Docker edition!") == false {
-		t.Errorf("Body does not contain 'Welcome to Security Management System Docker edition!'")
+	want := "Web application template"
+	if strings.Contains(string(body), want) == false {
+		t.Errorf("Body does not contain %q", want)
 	}
-	if strings.Contains(string(body), "Visits: 42") == false {
-		t.Errorf("Body does not contain 'Visits: 42'")
+	want = "Visits: 42"
+	if strings.Contains(string(body), want) == false {
+		t.Errorf("Body does not contain %q", want)
 	}
 }
