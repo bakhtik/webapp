@@ -12,5 +12,5 @@ RUN go build -o main cmd/webapp-docker/main.go
 # COPY --from=builder /app/main .
 # COPY public/ /app/public
 # COPY templates/ /app/templates
-EXPOSE 8080
+EXPOSE 80
 CMD ["./main"]

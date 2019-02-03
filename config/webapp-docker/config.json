@@ -1,0 +1,5 @@
+{
+    "db_conn_string": "some string",
+    "cache_address": "redis:6379",
+    "server_address": ":80"
+}

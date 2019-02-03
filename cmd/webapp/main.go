@@ -13,9 +13,9 @@ func main() {
 	// 	CacheAddr:  "localhost:6379",
 	// 	ServerAddr: ":8080",
 	// }
-
+	// read configuration
 	var config server.Config
-	config.FromFile("config/webapp/config.json")
+	config.FromFile(configFile)
 
 	server := server.NewServer(&config)
 	server.Start()
