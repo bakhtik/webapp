@@ -34,7 +34,7 @@ func (h *Handler) Index() http.Handler {
 
 		log.Println(r.RemoteAddr, r.RequestURI, r.Referer())
 
-		generateHTML(w, data, "layout", "navbar", "index")
+		generateHTML(w, data, "index")
 	})
 }
 
