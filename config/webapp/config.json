@@ -1,0 +1,5 @@
+{
+    "db_conn_string": "some string",
+    "cache_address": "localhost:6379",
+    "server_address": ":8080"
+}

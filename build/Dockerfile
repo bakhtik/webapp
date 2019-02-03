@@ -3,7 +3,7 @@ RUN go get -u -v github.com/go-redis/redis
 RUN go get -u -v github.com/denisenkom/go-mssqldb
 ADD . /go/src/github.com/bakhtik/webapp
 WORKDIR /go/src/github.com/bakhtik/webapp
-RUN go build -o main cmd/webapp/main.go
+RUN go build -o main cmd/webapp-docker/main.go
 
 # RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 

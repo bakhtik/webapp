@@ -17,12 +17,6 @@ type Server struct {
 	config     *Config
 }
 
-type Config struct {
-	DbConnString string
-	CacheAddr    string
-	ServerAddr   string
-}
-
 func NewServer(config *Config) *Server {
 	s := &Server{
 		// just in case you need some setup here
